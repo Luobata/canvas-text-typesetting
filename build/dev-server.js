@@ -32,7 +32,7 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 // api
-var port = 9598;
+var port = 8598;
 app.use('/', express.static('./asserts/'));
 module.exports = app.listen(port, function(err) {
     if (err) {
