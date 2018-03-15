@@ -75,10 +75,12 @@ export default class TypeSetting {
         const lineHeight = getLineHeight();
 
         let beginX = startX;
-        let beginY = startY + lineHeight;
+        // let beginY = startY + lineHeight;
+        let beginY = startY;
         this.ctx.save();
         this.ctx.fillStyle = this.config.color;
         this.ctx.font = `${this.config.fontSize} ${this.config.fontFamily}`;
+        this.ctx.textBaseline = 'top';
         for (let i of this.config.text) {
             const width = getWidth(i);
             const eX = beginX + width;
@@ -95,6 +97,6 @@ export default class TypeSetting {
         }
         this.ctx.restore();
 
-        return beginY + startY + 2;
+        return beginY + startY + lineHeight;
     }
 }
