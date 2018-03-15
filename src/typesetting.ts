@@ -1,4 +1,4 @@
-import { parse } from 'babylon';
+import { getMargin } from './help';
 
 interface textConfig {
     text: string;
@@ -68,9 +68,8 @@ export default class TypeSetting {
             }
             if (typeof this.config.lineHeight === 'number') {
                 return this.config.lineHeight * height;
-            } else {
-                return parseInt(this.config.lineHeight, 10);
             }
+            return parseInt(this.config.lineHeight, 10);
         };
         const lineHeight = getLineHeight();
 
@@ -81,16 +80,16 @@ export default class TypeSetting {
         this.ctx.fillStyle = this.config.color;
         this.ctx.font = `${this.config.fontSize} ${this.config.fontFamily}`;
         this.ctx.textBaseline = 'top';
-        for (let i of this.config.text) {
+        for (const i of this.config.text) {
             const width = getWidth(i);
             const eX = beginX + width;
+            const margin = getMargin(i);
             if (eX > endX) {
                 beginX = startX;
                 beginY += lineHeight;
                 this.ctx.fillText(i, beginX, beginY);
                 beginX += width;
             } else {
-                console.log(beginX);
                 this.ctx.fillText(i, beginX, beginY);
                 beginX = eX;
             }
